@@ -1,0 +1,11 @@
+{
+  "name": "platform-mongodb-streams",
+  "version": "0.0.1",
+  "description": "MongoDB change streams listener service",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "author": "Goliatone <hello@goliatone.com> (http://goliatone.com)",
+  "license": "UNLICENSED"
+}
