@@ -7,5 +7,12 @@
     "test": "npm test"
   },
   "author": "Goliatone <hello@goliatone.com> (http://goliatone.com)",
-  "license": "UNLICENSED"
+  "license": "UNLICENSED",
+  "dependencies": {
+    "gextend": "^0.3.0",
+    "gkeypath": "^0.7.0",
+    "mongodb": "^3.0.10",
+    "mongodb-extjson": "^3.0.0",
+    "node-persist": "^3.0.1"
+  }
 }
