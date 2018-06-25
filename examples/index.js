@@ -17,7 +17,9 @@ const watcher = new Watcher({
         // when: [Watcher.UPDATE],
         // filter: { email: 'pepe@rone.com' },
         // fields: ['ran'],
-        topic: 'profile.peperone'
+        data: {
+            topic: 'profile.peperone'
+        }
     }]
 });
 
