@@ -92,3 +92,4 @@ src/kyle.json
 src/modules/server/public/build_info.json
 src/mqtt.js
 src/onelogin.js
+localStorage/*
