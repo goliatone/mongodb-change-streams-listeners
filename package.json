@@ -4,7 +4,8 @@
   "description": "MongoDB change streams listener service",
   "main": "index.js",
   "scripts": {
-    "test": "npm test"
+    "test": "bogota",
+    "dtest": "watch bogota tests/"
   },
   "author": "Goliatone <hello@goliatone.com> (http://goliatone.com)",
   "license": "UNLICENSED",
@@ -14,5 +15,12 @@
     "mongodb": "^3.0.10",
     "mongodb-extjson": "^3.0.0",
     "node-persist": "^3.0.1"
+  },
+  "devDependencies": {
+    "bogota": "^2.0.4",
+    "sinon": "^6.0.1",
+    "tap-spec": "^5.0.0",
+    "tape": "^4.9.1",
+    "watch": "^1.0.2"
   }
 }
