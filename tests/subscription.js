@@ -81,7 +81,7 @@ test('Subscription: createOperationTypeFilter should add a DELETE pipeline', t =
     t.end();
 });
 
-test('Subscription: createOperationTypeFilter should add a CREATE pipeline', t => {
+test.only('Subscription: createOperationTypeFilter should add a CREATE pipeline', t => {
     const src = getJsonTemplate();
     const sub = new Subscription(src);
 
@@ -112,6 +112,20 @@ test('Subscription: createOperationTypeFilter should add a UPDATE pipeline', t =
     });
 
     t.isEquivalent(sub.pipeline, expected, 'We should add a $match pipeline');
+    t.end();
+});
+
+test('Subscription: createOptions should add updateLookup if we have fields', t => {
+    const src = getJsonTemplate();
+    const sub = new Subscription(src);
+
+    const expected = 'updateLookup';
+
+    Subscription.createOptions(sub, {
+        fields: ['email']
+    });
+
+    t.isEquivalent(sub.options.fullDocument, expected, 'We should add a $match pipeline');
     t.end();
 });
 
