@@ -5,7 +5,7 @@ const Keypath = require('gkeypath');
 
 const watcher = new Watcher({
     connection: {
-        uri: process.env.NODE_MONGOURL,
+        uri: process.env.NODE_MONGODB_ENDPOINT,
     },
     options: {
         storage: {
