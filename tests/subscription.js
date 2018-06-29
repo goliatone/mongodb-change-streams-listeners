@@ -81,7 +81,7 @@ test('Subscription: createOperationTypeFilter should add a DELETE pipeline', t =
     t.end();
 });
 
-test.only('Subscription: createOperationTypeFilter should add a CREATE pipeline', t => {
+test('Subscription: createOperationTypeFilter should add a CREATE pipeline', t => {
     const src = getJsonTemplate();
     const sub = new Subscription(src);
 
@@ -129,11 +129,60 @@ test('Subscription: createOptions should add updateLookup if we have fields', t 
     t.end();
 });
 
-test('Subscription: createOperationTypeFilter should only call addPipeline if "when" clause is present', t => {
-    t.true(true, 'String sanitized.');
+// var htest = test.createHarness();
+// htest('Subscription', t => {
+
+// });
+test('Subscription: createProjection should only be applied if we have a fields attribute', t => {
+    const src = getJsonTemplate();
+    const sub = new Subscription(src);
+    const stub = sinon.stub(sub, 'addPipeline');
+
+    Subscription.createProjection(sub, {});
+
+    t.false(stub.called, 'We should not add an empty pipeline if no fields present');
+
+    Subscription.createProjection(sub, { fields: [] });
+
+    t.false(stub.called, 'We should not add an empty pipeline if fields empty');
+
+    Subscription.createProjection(sub, { fields: ['email'] });
+
+    t.true(stub.called, 'We should add a pipeline if fields present');
+
+    stub.resetBehavior();
+
     t.end();
 });
 
+test('Subscription: createProjection should create the proper pipeline', t => {
+    const src = getJsonTemplate();
+    const sub = new Subscription(src);
+
+    Subscription.createProjection(sub, { fields: ['email'] });
+
+    let pipeline = sub.getPipeline();
+    const expected = { '$project': { 'fullDocument.email': 1 } };
+
+    t.equal(pipeline.length, 1, 'Pipeline has one item');
+    t.isEquivalent(pipeline, [expected], 'We have $project object');
+
+    t.true(pipeline);
+
+    t.end();
+});
+
+test('Subscription: fixKeyName should not modify operator names', t => {
+    t.equal(Subscription.fixKeyName('$project'), '$project', 'Respect operator keys');
+    t.end();
+});
+
+test('Subscription: fixKeyName should be idempotent', t => {
+    let expected = Subscription.fixKeyName('email');
+
+    t.equal(Subscription.fixKeyName(expected), expected, 'Do not modify multiple times same key');
+    t.end();
+});
 
 function getJsonTemplate(extra = {}) {
     let json = {
