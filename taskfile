@@ -6,7 +6,15 @@ PATH=./node_modules/.bin:$PATH
 ##########################################
 
 function test:watch:file {
-    watch bogota $PWD/tests/$1
+    FILENAME=$1
+    if [[ ${FILENAME: -3} == ".js" ]] 
+    then 
+        print ""
+    else
+        FILENAME="$1.js"
+    fi
+
+    watch "bogota $PWD/tests/$FILENAME" ./tests
 }
 
 function _publish:check {
