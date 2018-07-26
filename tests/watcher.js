@@ -8,7 +8,7 @@ const Subscription = require('..').Subscription;
 
 test('Watcher: processChangeEvent fires 3 events', t => {
     const watcher = new Watcher({
-        autoinitialize: false,
+        autoinitialize: true,
         makeStorage: function() {
             return {
                 setCheckpoint: function() {
@@ -21,12 +21,23 @@ test('Watcher: processChangeEvent fires 3 events', t => {
         }
     });
 
+    const subscription = new Subscription({
+        collection: 'profile'
+    });
+
+    const change = {
+        operationType: 'update',
+        _id: {
+            _data: 'glsxD8gAAAACRmRfaWQAZFr7H8r23mgJAhfSbgBaEATcRYwCONNDVbf6Rv+2u9LeBA=='
+        }
+    };
+
     watcher.processChangeEvent(subscription, change);
 
     t.end();
 });
 
-test.only('Watcher: processChangeEvent calls add resume token', t => {
+test('Watcher: processChangeEvent calls add resume token', t => {
     const watcher = new Watcher({
         autoinitialize: true,
         makeStorage: function() {
@@ -46,13 +57,12 @@ test.only('Watcher: processChangeEvent calls add resume token', t => {
         collection: 'profile'
     });
 
-
     const change = {
         operationType: 'update',
         _id: {
             _data: 'glsxD8gAAAACRmRfaWQAZFr7H8r23mgJAhfSbgBaEATcRYwCONNDVbf6Rv+2u9LeBA=='
         }
-    }
+    };
 
     watcher.processChangeEvent(subscription, change);
 
