@@ -14,7 +14,8 @@
     "gkeypath": "^0.7.0",
     "mongodb": "^3.0.10",
     "mongodb-extjson": "^3.0.0",
-    "node-persist": "^3.0.1"
+    "node-persist": "^3.0.1",
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
     "bogota": "^2.0.4",
