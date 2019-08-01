@@ -7,3 +7,5 @@ module.exports.Signals = require('./lib/signals');
 module.exports.ChangeTypes = require('./lib/change-type');
 
 module.exports.Subscription = require('./lib/subscription');
+
+module.exports.SubscriptionManager = require('./lib/subscriptionmanager');
